@@ -11,9 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * @author akitoshi
- */
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,10 +20,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http
         .authorizeRequests(authorize -> authorize
             .antMatchers("/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/v1/pokemon", "/v1/pokemon/{pokemonId}").hasAuthority("SCOPE_pokedex/read")
-            .antMatchers(HttpMethod.POST, "/v1/pokemon").hasAuthority("SCOPE_pokedex/write")
-            .antMatchers(HttpMethod.PUT, "/v1/pokemon/{pokemonId}").hasAuthority("SCOPE_pokedex/write")
-            .antMatchers(HttpMethod.DELETE, "/v1/pokemon/{pokemonId}").hasAuthority("SCOPE_pokedex/write")
+            .antMatchers(HttpMethod.GET, "/v1/food", "/v1/food/{foodId}").hasAuthority("SCOPE_food/read")
+            .antMatchers(HttpMethod.POST, "/v1/food").hasAuthority("SCOPE_food/write")
+            .antMatchers(HttpMethod.PUT, "/v1/food/{foodId}").hasAuthority("SCOPE_food/write")
+            .antMatchers(HttpMethod.DELETE, "/v1/food/{foodId}").hasAuthority("SCOPE_food/write")
             .anyRequest().denyAll()
         )
         .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)

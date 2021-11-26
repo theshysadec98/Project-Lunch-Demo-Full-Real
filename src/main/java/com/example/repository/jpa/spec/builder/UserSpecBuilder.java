@@ -5,9 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
-/**
- * @author akitoshi
- */
 public class UserSpecBuilder extends AbstractSpecBuilder<User> {
 
   public UserSpecBuilder pageable(Integer page, Integer size, List<String> orders) {

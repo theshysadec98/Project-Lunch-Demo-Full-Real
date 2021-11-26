@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
-/**
- * @author chautn
- */
+
 public abstract class ContextService {
 
   protected Map<String, Object> jwtAttributes() {

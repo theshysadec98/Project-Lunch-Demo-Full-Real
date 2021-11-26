@@ -15,9 +15,7 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.CollectionUtils;
 
-/**
- * @author akitoshi
- */
+
 public abstract class AbstractSpecBuilder<T> implements SpecBuilder<T> {
 
   private final static int DEFAULT_PAGE_NUMBER = 0;

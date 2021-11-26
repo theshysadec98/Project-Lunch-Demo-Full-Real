@@ -10,9 +10,7 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * @author akitoshi
- */
+
 @Getter
 @Setter
 @Entity

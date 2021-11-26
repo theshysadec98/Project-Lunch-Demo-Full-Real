@@ -6,9 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.server.resource.InvalidBearerTokenException;
 import org.springframework.stereotype.Service;
 
-/**
- * @author akitoshi
- */
 @Service
 @Slf4j
 public class IndexService extends ContextService {

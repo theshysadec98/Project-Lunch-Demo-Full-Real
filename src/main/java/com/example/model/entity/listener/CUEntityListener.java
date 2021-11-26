@@ -5,9 +5,7 @@ import java.util.Calendar;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-/**
- * @author akitoshi
- */
+
 public class CUEntityListener {
 
   @PrePersist

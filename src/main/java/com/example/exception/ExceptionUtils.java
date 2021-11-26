@@ -5,9 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author akitoshi
- */
+
 public class ExceptionUtils {
 
   public static List<String> stackTraceToListMessages(StackTraceElement[] elements) {
