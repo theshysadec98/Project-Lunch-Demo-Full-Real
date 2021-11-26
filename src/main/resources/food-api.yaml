@@ -1,0 +1,313 @@
+---
+openapi: 3.0.1
+info:
+  title: Application API by Trungdle
+  description: 'tả tả cl'
+  contact:
+    name: Trungdle
+    url: https://www.facebook.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Viet-Nam/test/1.0.0
+  - url: http://localhost:8080
+paths:
+  /food:
+    get:
+      tags:
+        - FoodController
+      description: Xem danh sách Food
+      operationId: getAllByFilter
+      parameters:
+        - name: name
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: taste
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          required: true
+          style: form
+          explode: true
+          schema:
+            $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Done.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponsePage'
+        "401":
+          description: Unconfirmed
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponsePage'
+        "403":
+          description: Access is forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponsePage'
+        "404":
+          description: Not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResponsePage'
+    post:
+      tags:
+        - FoodController
+      description: Add food
+      operationId: addFood
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodDto'
+      responses:
+        "200":
+          description: Done.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "401":
+          description:  Unconfirmed.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "403":
+          description: Access is forbidden.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "404":
+          description: Not found.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+    put:
+      tags:
+        - FoodController
+      description: Update Food
+      operationId: editFood
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodDto'
+      responses:
+        "200":
+          description: Done.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "401":
+          description:  Unconfirmed.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "403":
+          description: Access is forbidden.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "404":
+          description: Not found.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+
+
+  /food/{id}:
+    get:
+      tags:
+        - FoodController
+      description: Find by id
+      operationId: getFoodById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Done.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "401":
+          description: Unconfirmed
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "403":
+          description: Access is forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+        "404":
+          description: Not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RestResult'
+
+
+    delete:
+      tags:
+        - user-controller
+      description: delete user
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Thành công
+          content:
+            '*/*':
+              schema:
+                type: string
+        "401":
+          description: Chưa xác thực
+          content:
+            '*/*':
+              schema:
+                type: string
+        "403":
+          description: Truy cập bị cấm
+          content:
+            '*/*':
+              schema:
+                type: string
+        "404":
+          description: Không tìm thấy
+          content:
+            '*/*':
+              schema:
+                type: string
+
+
+components:
+  schemas:
+    FoodDto:
+      required:
+        - name
+        - taste
+      type: object
+      properties:
+        name:
+          type: string
+        taste:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: integer
+        dateOfBirth:
+          type: string
+          format: date-time
+    RestResult:
+      type: object
+      properties:
+        responseErrorCode:
+          type: string
+        responseMessage:
+          type: string
+        responseData:
+          type: object
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+    Sort:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean
+    ResponsePage:
+      type: object
+      properties:
+        responseData:
+          type: object
+        totalPage:
+          type: integer
+          format: int32
+        totalRecord:
+          type: integer
+          format: int64
+    FoodRespone:
+      required:
+        - name
+        - taste
+      type: object
+      properties:
+        id:
+          type: integer
+          format: $int64
+        name:
+          type: string
+        taste:
+          type: string
+        description:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        localdate:
+          type: string
+          format: date-time
